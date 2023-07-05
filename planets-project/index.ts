@@ -23,5 +23,5 @@ readStreamEvent.on('error', (err) => {
 
 readStreamEvent.on('end', () => {
 	console.log('finish reading file');
-	console.log({ results });
+	console.log(`There are ${results.length} habitable planets found!`);
 });
