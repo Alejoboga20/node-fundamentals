@@ -22,6 +22,6 @@ readStreamEvent.on('error', (err) => {
 });
 
 readStreamEvent.on('end', () => {
-	console.log('finish reading file');
-	console.log(`There are ${results.length} habitable planets found!`);
+	console.log('Finish reading file. There are ' + results.length + ' habitable planets found!');
+	console.log(results.map((planet) => planet.kepler_name));
 });
