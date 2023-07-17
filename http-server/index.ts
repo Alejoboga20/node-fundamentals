@@ -28,8 +28,8 @@ server.on('request', (req, res) => {
 		req.on('data', (data) => {
 			const friend = JSON.parse(data.toString());
 			friends.push(friend);
-			console.log({ friends });
 		});
+		req.pipe(res);
 	} else if (req.method === 'GET' && items[1] === 'friends') {
 		res.writeHead(STATUS_OK, {
 			'Content-Type': 'application/json',
