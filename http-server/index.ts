@@ -4,15 +4,38 @@ const PORT = 3000;
 const STATUS_OK = 200;
 const STATUS_NOT_FOUND = 404;
 
+const friends = [
+	{
+		id: 0,
+		name: 'John',
+	},
+	{
+		id: 1,
+		name: 'Jane',
+	},
+	{
+		id: 2,
+		name: 'Jack',
+	},
+];
+
 const server = http.createServer();
 
 server.on('request', (req, res) => {
-	if (req.url === '/friends') {
+	const items = req.url?.split('/') || [];
+
+	if (items[1] === 'friends') {
 		res.writeHead(STATUS_OK, {
 			'Content-Type': 'application/json',
 		});
-		res.end(JSON.stringify({ ok: true, msg: 'Friends endpoint' }));
-	} else if (req.url === '/messages') {
+
+		if (items.length === 3) {
+			const friendId = Number(items[2]);
+			res.end(JSON.stringify({ ok: true, friend: friends[friendId] }));
+		} else {
+			res.end(JSON.stringify({ ok: true, friends }));
+		}
+	} else if (items[1] === '/messages') {
 		res.statusCode = STATUS_OK;
 		res.setHeader('Content-Type', 'text/html');
 		res.write('<html>');
