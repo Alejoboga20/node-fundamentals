@@ -24,7 +24,13 @@ const server = http.createServer();
 server.on('request', (req, res) => {
 	const items = req.url?.split('/') || [];
 
-	if (items[1] === 'friends') {
+	if (req.method === 'POST' && items[1] === 'friends') {
+		req.on('data', (data) => {
+			const friend = JSON.parse(data.toString());
+			friends.push(friend);
+			console.log({ friends });
+		});
+	} else if (req.method === 'GET' && items[1] === 'friends') {
 		res.writeHead(STATUS_OK, {
 			'Content-Type': 'application/json',
 		});
@@ -35,7 +41,7 @@ server.on('request', (req, res) => {
 		} else {
 			res.end(JSON.stringify({ ok: true, friends }));
 		}
-	} else if (items[1] === '/messages') {
+	} else if (req.method === 'GET' && items[1] === '/messages') {
 		res.statusCode = STATUS_OK;
 		res.setHeader('Content-Type', 'text/html');
 		res.write('<html>');
