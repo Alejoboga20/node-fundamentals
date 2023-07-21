@@ -24,7 +24,15 @@ const friends = [
 
 const app = express();
 
-app.get('/friends', (req, res) => {
+app.use((req, _, next) => {
+	const start = Date.now();
+	next();
+
+	const delta = Date.now() - start;
+	console.log(`request: ${req.method} ${req.path}, delta time: ${delta}`);
+});
+
+app.get('/friends', (_, res) => {
 	res.json({ friends });
 });
 
@@ -32,7 +40,7 @@ app.get('/friends/:friendId', (req, res) => {
 	const friendId = Number(req.params.friendId);
 	const friend = friends[friendId];
 
-	if (friend) res.status(StatusCode.OK).json({ friend });
+	if (friend) return res.status(StatusCode.OK).json({ friend });
 
 	res.status(StatusCode.NOT_FOUND).json({ error: 'Friend not found' });
 });
