@@ -31,7 +31,7 @@ app.get('/friends', (_, res) => {
 
 app.post('/friends', (req, res) => {
 	if (!req.body.name) {
-		res.status(StatusCode.BAD_REQUEST).json({ error: 'Name is required' });
+		return res.status(StatusCode.BAD_REQUEST).json({ error: 'Name is required' });
 	}
 
 	const newFriend = {
@@ -40,7 +40,7 @@ app.post('/friends', (req, res) => {
 	};
 
 	friends.push(newFriend);
-	res.status(StatusCode.CREATED).json({ newFriend });
+	return res.status(StatusCode.CREATED).json({ newFriend });
 });
 
 app.get('/friends/:friendId', (req, res) => {
