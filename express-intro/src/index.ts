@@ -2,6 +2,7 @@ import express from 'express';
 
 import MessagesController from './controllers/messages.controller';
 import FriendsController from './controllers/friends.controller';
+import { PORT } from './constants/index';
 
 /* Create Express App */
 const app = express();

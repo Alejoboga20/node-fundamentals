@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { friends } from '../data/friends';
+import { StatusCode } from '../constants/index';
 
 const getFriends = (_: Request, res: Response) => {
 	res.json({ friends });

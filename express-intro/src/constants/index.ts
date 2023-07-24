@@ -1,6 +1,6 @@
-const PORT = 3000;
+export const PORT = 3000;
 
-enum StatusCode {
+export enum StatusCode {
 	OK = 200,
 	CREATED = 201,
 	BAD_REQUEST = 400,
