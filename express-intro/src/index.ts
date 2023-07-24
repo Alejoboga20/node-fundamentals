@@ -1,5 +1,5 @@
 import express from 'express';
-import { friends } from './data/friends';
+
 import MessagesController from './controllers/messages.controller';
 import FriendsController from './controllers/friends.controller';
 
