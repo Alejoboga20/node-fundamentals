@@ -1,7 +1,7 @@
 import express from 'express';
 
-import MessagesController from './controllers/messages.controller';
-import FriendsController from './controllers/friends.controller';
+import friendsRouter from './routes/friends.router';
+import messagesRouter from './routes/messages.router';
 import { PORT } from './constants/index';
 
 /* Create Express App */
@@ -18,14 +18,9 @@ app.use((req, _, next) => {
 
 app.use(express.json());
 
-/* APIs */
-app.get('/friends', FriendsController.getFriends);
-
-app.post('/friends', FriendsController.createFriend);
-
-app.get('/friends/:friendId', FriendsController.getFriendById);
-
-app.get('/messages', MessagesController.getMessages);
+/* Mount Routers */
+app.use('/api/v1/friends', friendsRouter);
+app.use('/api/v1/messages', messagesRouter);
 
 /* Start Server */
 app.listen(PORT, () => console.log(`express app listening on port ${PORT}!`));
