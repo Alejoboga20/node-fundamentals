@@ -1,4 +1,9 @@
-export const friends = [
+type Friend = {
+	id: number;
+	name: string;
+};
+
+export const friends: Friend[] = [
 	{
 		id: 0,
 		name: 'Ross Geller',
