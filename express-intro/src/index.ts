@@ -1,29 +1,19 @@
 import express from 'express';
+import { friends } from './data/friends';
 
 const PORT = 3000;
 
 enum StatusCode {
 	OK = 200,
+	CREATED = 201,
+	BAD_REQUEST = 400,
 	NOT_FOUND = 404,
 }
 
-const friends = [
-	{
-		id: 0,
-		name: 'Ross Geller',
-	},
-	{
-		id: 1,
-		name: 'Chandler Bing',
-	},
-	{
-		id: 2,
-		name: 'Joey Tribbiani',
-	},
-];
-
+/* Create Express App */
 const app = express();
 
+/* Middlewares */
 app.use((req, _, next) => {
 	const start = Date.now();
 	next();
@@ -32,8 +22,25 @@ app.use((req, _, next) => {
 	console.log(`request: ${req.method} ${req.path}, delta time: ${delta}`);
 });
 
+app.use(express.json());
+
+/* APIs */
 app.get('/friends', (_, res) => {
 	res.json({ friends });
+});
+
+app.post('/friends', (req, res) => {
+	if (!req.body.name) {
+		res.status(StatusCode.BAD_REQUEST).json({ error: 'Name is required' });
+	}
+
+	const newFriend = {
+		id: friends.length,
+		name: req.body.name,
+	};
+
+	friends.push(newFriend);
+	res.status(StatusCode.CREATED).json({ newFriend });
 });
 
 app.get('/friends/:friendId', (req, res) => {
@@ -45,4 +52,5 @@ app.get('/friends/:friendId', (req, res) => {
 	res.status(StatusCode.NOT_FOUND).json({ error: 'Friend not found' });
 });
 
+/* Start Server */
 app.listen(PORT, () => console.log(`express app listening on port ${PORT}!`));
