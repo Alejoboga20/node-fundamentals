@@ -6,7 +6,7 @@ const getMessages = (_: Request, res: Response) => {
 };
 
 const sendFile = (_: Request, res: Response) => {
-	const pathName = path.join(__dirname, '../..', 'public', 'image.png');
+	const pathName = path.join(__dirname, '../..', 'public', 'images', 'image.png');
 
 	res.sendFile(pathName);
 };

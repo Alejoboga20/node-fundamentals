@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 
 import friendsRouter from './routes/friends.router';
@@ -16,6 +17,7 @@ app.use((req, _, next) => {
 	console.log(`request: ${req.method} ${req.path}, delta time: ${delta}`);
 });
 
+app.use('/', express.static(path.join(__dirname, '../', 'public')));
 app.use(express.json());
 
 /* Mount Routers */
