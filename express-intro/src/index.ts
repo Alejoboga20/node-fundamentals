@@ -8,6 +8,10 @@ import { PORT } from './constants/index';
 /* Create Express App */
 const app = express();
 
+/* Config View Engine - Use handlebars in views folder*/
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
+
 /* Middlewares */
 app.use((req, _, next) => {
 	const start = Date.now();
@@ -17,10 +21,13 @@ app.use((req, _, next) => {
 	console.log(`request: ${req.method} ${req.path}, delta time: ${delta}`);
 });
 
-app.use('/', express.static(path.join(__dirname, '../', 'public')));
+app.use('/site', express.static(path.join(__dirname, '../', 'public')));
 app.use(express.json());
 
 /* Mount Routers */
+app.get('/', (req, res) => {
+	res.render('index', { title: 'Express Intro', caption: 'Hello World' });
+});
 app.use('/api/v1/friends', friendsRouter);
 app.use('/api/v1/messages', messagesRouter);
 
