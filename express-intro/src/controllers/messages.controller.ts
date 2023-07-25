@@ -1,8 +1,9 @@
 import path from 'path';
 import { Request, Response } from 'express';
+import { friends } from '../models/friend.model';
 
 const getMessages = (_: Request, res: Response) => {
-	res.send('<h1>Messages</h1>');
+	res.render('messages', { title: 'Messages', friends: JSON.stringify(friends) });
 };
 
 const sendFile = (_: Request, res: Response) => {
