@@ -1,4 +1,4 @@
-type Launch = {
+export type Launch = {
 	flightNumber: number;
 	mission: string;
 	rocket: string;
