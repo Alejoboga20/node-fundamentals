@@ -30,4 +30,6 @@ const loadPlanetsData = (): Promise<void> => {
 	});
 };
 
+export const getAllPlanets = () => results;
+
 export { loadPlanetsData, results as planets };
