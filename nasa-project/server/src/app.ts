@@ -1,8 +1,10 @@
 import path from 'path';
 import express from 'express';
 import cors from 'cors';
-import planetsRouter from './routes/planets/planets.router';
 import morgan from 'morgan';
+
+import planetsRouter from './routes/planets/planets.router';
+import launchesRouter from './routes/launches/launches.router';
 
 /* Init Express Application */
 const app = express();
@@ -22,5 +24,6 @@ app.get('/', (req, res) => {
 
 /* Routing */
 app.use('/api/v1/planets', planetsRouter);
+app.use('/api/v1/launches', launchesRouter);
 
 export default app;
