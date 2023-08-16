@@ -8,7 +8,7 @@
 		"build": "npm run clean && tsc",
 		"start": "node src",
 		"local": "PORT=8080 ts-node src/server.ts",
-		"dev": "nodemon src -e ts,json --exec 'npm run local'"
+		"watch": "nodemon src -e ts,json --exec 'npm run local'"
 	},
 	"keywords": [],
 	"author": "Alejoboga20",
