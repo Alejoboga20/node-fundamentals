@@ -6,7 +6,7 @@
 	"scripts": {
 		"clean": "rimraf ./build",
 		"build": "npm run clean && tsc",
-		"start": "node src",
+		"start": "ts-node src/server.ts",
 		"local": "PORT=8080 ts-node src/server.ts",
 		"watch": "nodemon src -e ts,json --exec 'npm run local'"
 	},
